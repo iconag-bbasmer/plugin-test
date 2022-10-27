@@ -1,9 +1,10 @@
-import * as React from "react";
-import CompA from "./components/CompA";
+import * as React from 'react';
+import CompA from './components/CompA';
 
 function App() {
-  const ENV_VARS = window.__RUNTIME_CONFIG__;
-  let showPlugin1: boolean = ENV_VARS.ENABLED_PLUGINS.includes("PLUGIN_1");
+  //  const ENV_VARS = window.__RUNTIME_CONFIG__;
+  //  let showPlugin1: boolean = ENV_VARS.ENABLED_PLUGINS.includes('PLUGIN_1');
+  let showPlugin1 = true;
 
   let PluginB: any;
   let PluginC: any;
@@ -12,11 +13,11 @@ function App() {
   let TypedFunction: any = undefined;
 
   if (showPlugin1) {
-    PluginB = React.lazy(() => import("./components/plugins/CompB"));
-    PluginC = React.lazy(() => import("./exports/CompC"));
+    PluginB = React.lazy(() => import('./components/plugins/CompB'));
+    PluginC = React.lazy(() => import('./exports/CompC'));
 
     const loader = async () => {
-      ({ FuncA } = await import("./components/plugins/Functions"));
+      ({ FuncA } = await import('./components/plugins/Functions'));
       setFuncVal(FuncA());
     };
     loader();
@@ -29,7 +30,7 @@ function App() {
   }
 
   return (
-    <>
+    <React.Fragment>
       <CompA />
       <React.Suspense fallback={<div>Loading Plugins...</div>}>
         {PluginB && <PluginB />}
@@ -37,7 +38,7 @@ function App() {
         {FuncVal && FuncVal}
         {TypedFunction && TypedFunction()}
       </React.Suspense>
-    </>
+    </React.Fragment>
   );
 }
 
