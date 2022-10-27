@@ -1,0 +1,3 @@
+window.__RUNTIME_CONFIG__ = {
+  ENABLED_PLUGINS: ["PLUGIN_1"],
+};
